@@ -183,9 +183,10 @@ def process_data(input_company_names):
             else:
                 failed_companies.append(input_company_name)
             writer.writerow(data_row)
-        print("\nFailed to retrieve data for the following companies:", flush=True)
-        for company in failed_companies:
-            print(f"\t- {company}")
+        if failed_companies:
+            print("\nFailed to retrieve data for the following companies:", flush=True)
+            for company in failed_companies:
+                print(f"\t- {company}")
 
 # MAIN FUNCTION
 
