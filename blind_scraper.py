@@ -141,7 +141,7 @@ def get_company_data_from_blind(database, input_company_name):
             traceback.print_exc()
             return None
 
-def process_data(input_company_names):
+def process_data(input_company_names, database):
     with open(OUTPUT_FILE_PATH, "w", newline="") as file:
         failed_companies = []
         requests_made = 0
@@ -193,5 +193,5 @@ def process_data(input_company_names):
 if __name__ == "__main__":
     input_company_names = read_input_file()
     database = read_database_file()
-    process_data(input_company_names)
+    process_data(input_company_names, database)
     write_database_file(database)
