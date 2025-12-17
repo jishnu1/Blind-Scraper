@@ -1,5 +1,5 @@
 {
-    "INPUT_FILE_PATH": "input/example_input.txt",
+    "INPUT_FILE_PATH": "input/debug_input.txt",
     "OUTPUT_FILE_PATH": "output/output.csv",
     "DATABASE_FILE_PATH": "database/database.json",
     "OUTPUT_FILE_HEADERS": {
