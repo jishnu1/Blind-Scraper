@@ -1,7 +1,11 @@
+# DESCRIPTION
+# This tier calculator assigns scores based on overall, work-life balance, company culture, size.
+# It also excludes certain companies based on specific criteria.
+
 exclusions = {
 
-    "Audible":                  "in-person",
-    "Dell":                     "in-person",
+    "Audible":                  "fully onsite",
+    "Dell":                     "fully onsite",
 
     "Discover Financial Services":  "bad location (Riverwoods, IL)",
     "IMC":                          "bad location (Chicago, IL)",
