@@ -83,7 +83,7 @@ def get_company_data_from_blind(database, input_company_name):
 
             # overview
             overview_div = data_div.find("div", class_="border-b border-gray-300 bg-white px-4 py-6 md:rounded-xl md:border md:px-6")
-            website = overview_div.find("h3", class_="text-sm font-semibold").text.strip()
+            website = overview_div.find("h3", class_="text-sm font-semibold").text.strip() if overview_div.find("h3", class_="text-sm font-semibold") else None
             overview_div_list = overview_div.find_all("div", class_="font-semibold")
             industry  = overview_div_list[0].text.strip()
             locations = overview_div_list[1].text.strip()
@@ -101,11 +101,11 @@ def get_company_data_from_blind(database, input_company_name):
             management_score            = reviews_div_list[4].text.strip()
 
             # compensation
-            median_total_compensation = data_div.find("p", class_="font-bold text-blue-system").text.strip()
+            median_total_compensation = data_div.find("p", class_="font-bold text-blue-system").text.strip() if data_div.find("p", class_="font-bold text-blue-system") else None
             compensation_h5_list = data_div.find_all("h5", class_="text-md font-semibold")
-            _25th_percentile = compensation_h5_list[0].text.strip()
-            _70th_percentile = compensation_h5_list[1].text.strip()
-            _90th_percentile = compensation_h5_list[2].text.strip()
+            _25th_percentile = compensation_h5_list[0].text.strip() if len(compensation_h5_list) > 0 else None
+            _70th_percentile = compensation_h5_list[1].text.strip() if len(compensation_h5_list) > 1 else None
+            _90th_percentile = compensation_h5_list[2].text.strip() if len(compensation_h5_list) > 2 else None
             
             # other
             current_date = time.strftime("%Y-%m-%d")
