@@ -100,6 +100,8 @@ def get_company_data_from_blind(database, input_company_name):
             company_culture_score       = reviews_div_list[3].text.strip()
             management_score            = reviews_div_list[4].text.strip()
 
+            # TODO: fix compensation parsing
+
             # compensation
             median_total_compensation = data_div.find("p", class_="font-bold text-blue-system").text.strip() if data_div.find("p", class_="font-bold text-blue-system") else None
             compensation_h5_list = data_div.find_all("h5", class_="text-md font-semibold")
