@@ -75,32 +75,34 @@ def get_company_data_from_blind(database, input_company_name):
     else:
         try:
             # general
-            company_name_tag = soup.find("div", class_="text-center text-2xl font-bold lg:text-left")
-            company_name = company_name_tag.text.strip() if company_name_tag else None
-            link_tag = soup.find("link", rel="canonical")
-            url = link_tag["href"] if link_tag and "href" in link_tag.attrs else None
+            company_name_tag = soup.find("div", class_="mb-1 text-xl font-semibold md:mt-3 md:text-2xl md:font-bold")
+            company_name = company_name_tag.text.strip()
+
+            # data div
+            data_div = soup.find("div", class_="flex flex-col gap-2 md:gap-4")
 
             # overview
-            website = soup.find("h3", class_="text-base font-semibold sm:text-lg").text.strip()
-            overview_div_list = soup.find_all("div", class_="text-base font-semibold sm:text-lg")
-            industry = overview_div_list[0].text.strip()
+            overview_div = data_div.find("div", class_="border-b border-gray-300 bg-white px-4 py-6 md:rounded-xl md:border md:px-6")
+            website = overview_div.find("h3", class_="text-sm font-semibold").text.strip()
+            overview_div_list = overview_div.find_all("div", class_="font-semibold")
+            industry  = overview_div_list[0].text.strip()
             locations = overview_div_list[1].text.strip()
-            founded = overview_div_list[2].text.strip()
-            size = overview_div_list[3].text.strip()
-            salary = overview_div_list[4].text.strip()
+            founded   = overview_div_list[2].text.strip()
+            size      = overview_div_list[3].text.strip()
+            salary    = overview_div_list[4].text.strip()
 
             # reviews
-            overall_score = soup.find("div", class_="flex items-start gap-2 border-b border-gray-300 pb-1 pr-4 lg:flex-col lg:border-b-0 lg:border-r").find("div", class_="text-xl font-semibold").text.strip()
-            reviews_div_list = soup.find("div", class_="grid grid-flow-row grid-cols-1 gap-x-10 gap-y-4 lg:ml-9 lg:grid-cols-2").find_all("div", class_="font-semibold")
-            career_growth_score = reviews_div_list[0].text.strip()
-            work_life_balance_score = reviews_div_list[1].text.strip()
+            overall_score = data_div.find("div", class_="order-1 text-xl font-semibold md:order-2").text.strip()
+            reviews_div_list = data_div.find("div", class_="grid grid-flow-row grid-cols-1 gap-x-10 gap-y-4 md:ml-9 md:grid-cols-2").find_all("div", class_="font-semibold")
+            career_growth_score         = reviews_div_list[0].text.strip()
+            work_life_balance_score     = reviews_div_list[1].text.strip()
             compensation_benefits_score = reviews_div_list[2].text.strip()
-            company_culture_score = reviews_div_list[3].text.strip()
-            management_score = reviews_div_list[4].text.strip()
+            company_culture_score       = reviews_div_list[3].text.strip()
+            management_score            = reviews_div_list[4].text.strip()
 
             # compensation
-            median_total_compensation = soup.find("p", class_="font-bold text-blue-system sm:text-lg").text.strip()
-            compensation_h5_list = soup.find_all("h5", class_="text-md font-semibold")
+            median_total_compensation = data_div.find("p", class_="font-bold text-blue-system").text.strip()
+            compensation_h5_list = data_div.find_all("h5", class_="text-md font-semibold")
             _25th_percentile = compensation_h5_list[0].text.strip()
             _70th_percentile = compensation_h5_list[1].text.strip()
             _90th_percentile = compensation_h5_list[2].text.strip()
